@@ -9,14 +9,13 @@ public class Thruster : MonoBehaviour {
     public float VerticalPower=2.0f;
     public float HorizontalPower = 1.0f;
     public Text SpeedText;
+    public GameObject WinText;
+    public GameObject LoseText;
+    public GameObject RestartButton;
     private float curSpeed;
-
-    public Renderer upBurn;
-    public Renderer downBurn;
-    public Renderer leftBurn;
-    public Renderer rightBurn;
-
+    public AudioManager audioManager;
     Rigidbody2D mRB;
+    public GameObject LEMexplode;
 	// Use this for initialization
 	void Start () {
         mRB = GetComponent<Rigidbody2D>();      //Get Parent RB
@@ -79,9 +78,22 @@ public class Thruster : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (curSpeed > 2f)
+        if (collision.gameObject.tag == ("Win") &&  curSpeed < 2f)
+        {
+            RestartButton.SetActive(true);
+            WinText.SetActive(true);
+            audioManager.Win();
+            this.enabled = false;
+        }
+
+        else
         {
             print("Ya Dead");
+            Instantiate(LEMexplode, transform.position, transform.rotation);
+            LoseText.SetActive(true);
+            RestartButton.SetActive(true);
+            audioManager.Lose();
+            Destroy(gameObject);
         }
     }
 }

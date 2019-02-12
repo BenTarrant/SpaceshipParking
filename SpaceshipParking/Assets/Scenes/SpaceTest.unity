@@ -649,7 +649,7 @@ GameObject:
   - component: {fileID: 342975289}
   - component: {fileID: 342975288}
   m_Layer: 0
-  m_Name: WinZone (1)
+  m_Name: WinZoneLA
   m_TagString: Win
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

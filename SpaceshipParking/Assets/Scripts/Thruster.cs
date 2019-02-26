@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Thruster : MonoBehaviour {
@@ -16,6 +18,9 @@ public class Thruster : MonoBehaviour {
     public AudioManager audioManager;
     Rigidbody2D mRB;
     public GameObject LEMexplode;
+
+    string info;
+
 	// Use this for initialization
 	void Start () {
         mRB = GetComponent<Rigidbody2D>();      //Get Parent RB
@@ -78,13 +83,28 @@ public class Thruster : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == ("Win") &&  curSpeed < 2f)
+        if (collision.gameObject.tag == ("Win") && curSpeed < 2f)
         {
             RestartButton.SetActive(true);
             WinText.SetActive(true);
             audioManager.Win();
             this.enabled = false;
+
+            Landed();
+
         }
+
+        if (collision.gameObject.tag == ("WinLA") && curSpeed < 2f)
+        {
+            RestartButton.SetActive(true);
+            WinText.SetActive(true);
+            audioManager.Win();
+            this.enabled = false;
+
+            LandedLA();
+
+        }
+
 
         else
         {
@@ -96,4 +116,25 @@ public class Thruster : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+
+
+    public void Landed()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+
+        AnalyticsEvent.Custom("Landed" + scene, new Dictionary<string, object>
+    {
+
+    });
+    }
+
+    public void LandedLA()
+    {
+        AnalyticsEvent.Custom("LandedLA", new Dictionary<string, object>
+        {
+
+        });
+    }
+
+
 }

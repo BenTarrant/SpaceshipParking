@@ -21,47 +21,22 @@ public class Thruster : MonoBehaviour {
 
     string info;
 
-	// Use this for initialization
-	void Start () {
+    LoggerController experimentController;
+
+    // Use this for initialization
+    void Start () {
         mRB = GetComponent<Rigidbody2D>();      //Get Parent RB
         if(mRB==null) {
-            Debug.LogWarningFormat("To be a thruster {0:s} needs to have a RB to work", gameObject.name);
         }
 
         SpeedText.text = "SPEED:";
-	}
+
+        experimentController = GameObject.Find("GameManager").GetComponent<LoggerController>();
+    }
 
     void Update()
     {
-        //while (Input.GetKey("up")) // gets forward
-        //{
-        //    upBurn.enabled = true;
-        //    print("up pressed");
 
-        //}
-        //while (Input.GetKey("down")) // gets backward
-        //{
-        //    downBurn.enabled = true;
-        //    print("down pressed");
-        //}
-        //while (Input.GetKey("right")) // gets right
-        //{
-        //    rightBurn.enabled = true;
-        //    print("right pressed");
-        //}
-        //while (Input.GetKey("left")) // gets left
-        //{
-        //    leftBurn.enabled = true;
-        //    print(" left pressed");
-        //}
-
-        //else
-        //{
-        //    downBurn.enabled = false;
-        //    upBurn.enabled = false;
-        //    leftBurn.enabled = false;
-        //    rightBurn.enabled = false;
-        //}
     }
 
     // Update is called once per frame
@@ -83,57 +58,51 @@ public class Thruster : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == ("Win") && curSpeed < 2f)
+        if (collision.gameObject.tag == ("Win") && curSpeed < 199f)
         {
             RestartButton.SetActive(true);
             WinText.SetActive(true);
             audioManager.Win();
-            this.enabled = false;
 
             Landed();
 
         }
 
-        if (collision.gameObject.tag == ("WinLA") && curSpeed < 2f)
+        if (collision.gameObject.tag == ("WinLA") && curSpeed < 199f)
         {
             RestartButton.SetActive(true);
             WinText.SetActive(true);
             audioManager.Win();
-            this.enabled = false;
 
             LandedLA();
 
         }
 
 
-        else
-        {
-            print("Ya Dead");
-            Instantiate(LEMexplode, transform.position, transform.rotation);
-            LoseText.SetActive(true);
-            RestartButton.SetActive(true);
-            audioManager.Lose();
-            Destroy(gameObject);
-        }
+        //else
+        //{
+        //    print("Ya Dead");
+        //    Instantiate(LEMexplode, transform.position, transform.rotation);
+        //    LoseText.SetActive(true);
+        //    RestartButton.SetActive(true);
+        //    audioManager.Lose();
+        //    Destroy(gameObject);
+        //}
     }
 
 
     public void Landed()
     {
         Scene scene = SceneManager.GetActiveScene();
-
-        AnalyticsEvent.Custom("Landed" + scene, new Dictionary<string, object>
-    {
-
-    });
+        print("sending lading position");
+        experimentController.Landed(scene.name + " Non LA");
     }
 
     public void LandedLA()
     {
-        AnalyticsEvent.Custom("LandedLA", new Dictionary<string, object>
-        {
-
-        });
+        Scene scene = SceneManager.GetActiveScene();
+        print("sending lading position");
+        experimentController.Landed(scene.name + " LA");
     }
 
 

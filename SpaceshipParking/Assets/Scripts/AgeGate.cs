@@ -8,6 +8,7 @@ public class AgeGate : MonoBehaviour {
 
     public InputField inputField;
     int ageValue;
+    public CSVLogger CSV;
 
     private string PlayerID;
 
@@ -42,7 +43,7 @@ public class AgeGate : MonoBehaviour {
                 Debug.Log("OLD ENOUGH");
                 noInput.enabled = false;
                 tooYoung.enabled = false;
-                PlayerPrefs.SetInt("Player Age:", ageValue); // SETS THE INPUT FIELD DATA TO PLAYER PREFS
+                CSV.AgeSet(ageValue); // SETS THE INPUT FIELD DATA TO PLAYER PREFS
                 SceneManager.LoadScene(1);
             }
 

@@ -5,9 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class Restart : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+    private string DNF;
+
+
+    // Use this for initialization
+    void Start ()
+    {
+        DNF = "Did not Finish";
 	}
 	
 	// Update is called once per frame
@@ -17,12 +21,19 @@ public class Restart : MonoBehaviour {
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(1); // reload scene 0
+        SceneManager.LoadScene(2); // reload scene 0
     }
 
     public void QuitGame()
     {
+
         Application.Quit();
     }
+
+    void OnApplicationQuit()
+    {
+        PlayerPrefs.SetString("Finish State", DNF);
+    }
+
 
 }

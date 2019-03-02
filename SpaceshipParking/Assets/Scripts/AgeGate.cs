@@ -9,10 +9,17 @@ public class AgeGate : MonoBehaviour {
     public InputField inputField;
     int ageValue;
 
+    private string PlayerID;
+
     public Text noInput;
     public Text tooYoung;
 
-
+    public void Start()
+    {
+        PlayerPrefs.DeleteAll();
+        PlayerID = SystemInfo.deviceUniqueIdentifier;
+        PlayerPrefs.SetString("UNIQUE ID", PlayerID);
+    }
     public void AgeCheck()
     {
 
@@ -20,25 +27,35 @@ public class AgeGate : MonoBehaviour {
         {
             Debug.Log("field is empty");
             noInput.enabled = true;
+            inputField.text = "Enter Age...";
         }
                
-        ageValue = int.Parse(inputField.text);
-
-
-        if (ageValue >= 18f)
-        {
-           Debug.Log("OLD ENOUGH");
-           noInput.enabled = false;
-           tooYoung.enabled = false;
-            SceneManager.LoadScene(0);
-        }
+        
 
         else
+
         {
-            Debug.Log("TOO YOUNG");
-            noInput.enabled = false;
-            tooYoung.enabled = true;
+            ageValue = int.Parse(inputField.text);
+
+            if (ageValue >= 18f)
+            {
+                Debug.Log("OLD ENOUGH");
+                noInput.enabled = false;
+                tooYoung.enabled = false;
+                PlayerPrefs.SetInt("Player Age:", ageValue); // SETS THE INPUT FIELD DATA TO PLAYER PREFS
+                SceneManager.LoadScene(1);
+            }
+
+            else if (ageValue <= 17f)
+            {
+                Debug.Log("TOO YOUNG");
+                noInput.enabled = false;
+                tooYoung.enabled = true;
+            }
+
         }
+
+
     }
 
 

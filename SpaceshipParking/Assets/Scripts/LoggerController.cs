@@ -14,13 +14,25 @@ public class LoggerController : MonoBehaviour {
     // max number of trials
     public int numberOfTrials = 10;
 
+    public static LoggerController i;
+
+    void Awake()
+    {
+        if (!i)
+        {
+            i = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+            Destroy(gameObject);
+    }
 
     // Use this for initialization
     void Start()
     {
         // define the names of the custom datapoints we want to log
         // trial number, participant ID, trial start/end time are logged automatically
-        List<string> columnList = new List<string> { "Level 01 Choice", "Level 02 Choice" };
+        List<string> columnList = new List<string> { "Level 01 Choice", "Level 02 Choice", "Level 03 Choice" };
 
         participantID = participantNumber.ToString();
 
@@ -57,6 +69,11 @@ public class LoggerController : MonoBehaviour {
         // here we could have some time for feedback, loading the next trial etc
         // but we will just start the next trial immediately
         trialLogger.StartTrial();
+    }
+
+    public void AgeLog(int ageValue)
+    {
+        trialLogger.trial["Age"] = ageValue.ToString();
     }
 
 

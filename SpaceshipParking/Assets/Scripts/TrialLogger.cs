@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 
 public class TrialLogger : MonoBehaviour {
 
@@ -13,11 +14,13 @@ public class TrialLogger : MonoBehaviour {
     public string outputFolder;
 
     bool trialStarted = false;
-    string ID;
+    //string ID;
     string dataOutputPath;
+
+
     List<string> output;
-
-
+    int fileCount = 0;
+    public AgeGate value;
 
     // Use this for initialization
     void Awake () {
@@ -36,20 +39,22 @@ public class TrialLogger : MonoBehaviour {
 
     public void Initialize(string participantID, List<string> customHeader)
     {
-        ID = participantID;
+        //ID = participantID;
         header = customHeader;
         InitHeader();
         InitDict();
         output = new List<string>();
         output.Add(string.Join(",", header.ToArray()));
-        dataOutputPath = outputFolder + "/" + participantID + ".csv";
+
+        string result = Path.GetRandomFileName();
+        dataOutputPath = outputFolder + @"/TestResults_" + result + ".CSV";
     }
 
     private void InitHeader()
     {
-        header.Insert(1, "Age");
         header.Insert(2, "start_time");
         header.Insert(3, "end_time");
+        header.Insert(4, "Age");
     }
 
     private void InitDict()
@@ -106,7 +111,8 @@ public class TrialLogger : MonoBehaviour {
 
             if(File.Exists(dataOutputPath))
             {
-                print("overwriting data"); // numerical filepath increment system to go here
+                string result = Path.GetRandomFileName();
+                dataOutputPath = outputFolder + @"/TestResults_" + result + ".CSV";
             }
 
             Debug.Log(string.Format("Saved data to {0}.", dataOutputPath));
@@ -114,5 +120,6 @@ public class TrialLogger : MonoBehaviour {
         else Debug.LogError("Error saving data - TrialLogger was not initialsed properly");
         
     }
+
 
 }

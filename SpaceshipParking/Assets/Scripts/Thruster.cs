@@ -32,6 +32,7 @@ public class Thruster : MonoBehaviour {
         SpeedText.text = "SPEED:";
 
         experimentController = GameObject.Find("GameManager").GetComponent<LoggerController>();
+        audioManager = GameObject.Find("GameManager").GetComponent<AudioManager>();
     }
 
     void Update()

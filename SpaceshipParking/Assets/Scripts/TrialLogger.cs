@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+using UnityEngine.SceneManagement;
 
 public class TrialLogger : MonoBehaviour {
 
-    public int currentTrialNumber = 0;    
+    public int currentTrialNumber = 1;    
     List<string> header;
     [HideInInspector]
     public Dictionary<string, string> trial;
@@ -14,12 +19,13 @@ public class TrialLogger : MonoBehaviour {
     public string outputFolder;
 
     bool trialStarted = false;
-    //string ID;
+
     string dataOutputPath;
 
+    string data;
 
     List<string> output;
-    int fileCount = 0;
+
     public AgeGate value;
 
     // Use this for initialization
@@ -39,22 +45,22 @@ public class TrialLogger : MonoBehaviour {
 
     public void Initialize(string participantID, List<string> customHeader)
     {
-        //ID = participantID;
+
         header = customHeader;
         InitHeader();
         InitDict();
         output = new List<string>();
         output.Add(string.Join(",", header.ToArray()));
 
-        string result = Path.GetRandomFileName();
-        dataOutputPath = outputFolder + @"/TestResults_" + result + ".CSV";
+        dataOutputPath = outputFolder + @"/TestResults" + ".CSV";
     }
 
     private void InitHeader()
     {
-        header.Insert(2, "start_time");
-        header.Insert(3, "end_time");
-        header.Insert(4, "Age");
+        header.Insert(0, "Level");
+        header.Insert(1, "Start Time");
+        header.Insert(2, "End Time");
+        header.Insert(3, "Age");
     }
 
     private void InitDict()
@@ -71,7 +77,8 @@ public class TrialLogger : MonoBehaviour {
         trialStarted = true;
         currentTrialNumber += 1;
         InitDict();
-        trial["start_time"] = Time.time.ToString();
+        trial["Start Time"] = Time.time.ToString();
+
     }
 
     public void EndTrial()
@@ -80,7 +87,9 @@ public class TrialLogger : MonoBehaviour {
         {
             if (trialStarted)
             {
-                trial["end_time"] = Time.time.ToString();
+                trial["End Time"] = Time.time.ToString();
+                Scene scene = SceneManager.GetActiveScene(); // fetch the active scene from build index
+                trial["Level"] = scene.name.ToString(); // write that scene name to string for CSV
                 output.Add(FormatTrialData());
                 trialStarted = false;
             }
@@ -102,24 +111,44 @@ public class TrialLogger : MonoBehaviour {
         return string.Join(",", rowData.ToArray());
     }
 
-    private void OnApplicationQuit()
+
+    public void OnApplicationQuit()
     {
 
         if (output != null && dataOutputPath != null)
         {
             File.WriteAllLines(dataOutputPath, output.ToArray());
 
-            if(File.Exists(dataOutputPath))
-            {
-                string result = Path.GetRandomFileName();
-                dataOutputPath = outputFolder + @"/TestResults_" + result + ".CSV";
-            }
-
             Debug.Log(string.Format("Saved data to {0}.", dataOutputPath));
+
+            // NOW MAIL RESULTS ---------------------------------------------------
+
+            MailMessage mail = new MailMessage();
+
+            mail.From = new MailAddress("aversetoloss@gmail.com");
+            mail.To.Add("aversetoloss@gmail.com");
+            mail.Subject = "Test Mail Subject";
+            mail.Body = "This is for testing SMTP mail With Attachment";
+
+            var pathToImage = dataOutputPath;
+            string attachmentPath = pathToImage;
+            System.Net.Mail.Attachment attachment = new System.Net.Mail.Attachment(attachmentPath);
+            mail.Attachments.Add(attachment);
+
+            SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
+            smtpServer.Port = 587;
+            smtpServer.Credentials = new System.Net.NetworkCredential("aversetoloss@gmail.com", "LossAverse1") as ICredentialsByHost;
+            smtpServer.EnableSsl = true;
+            ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+            {
+                return true;
+            };
+            smtpServer.Send(mail);
+            Debug.Log("success");
         }
+
         else Debug.LogError("Error saving data - TrialLogger was not initialsed properly");
         
     }
-
 
 }

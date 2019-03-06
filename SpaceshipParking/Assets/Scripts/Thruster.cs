@@ -61,7 +61,7 @@ public class Thruster : MonoBehaviour {
     {
         if (collision.gameObject.tag == ("Win") && curSpeed < 199f)
         {
-            RestartButton.SetActive(true);
+            RestartButton.SetActive(true); // CHANGE THIS TO NEXT LEVEL BUTTON
             WinText.SetActive(true);
             audioManager.Win();
 
@@ -80,30 +80,28 @@ public class Thruster : MonoBehaviour {
         }
 
 
-        //else
-        //{
-        //    print("Ya Dead");
-        //    Instantiate(LEMexplode, transform.position, transform.rotation);
-        //    LoseText.SetActive(true);
-        //    RestartButton.SetActive(true);
-        //    audioManager.Lose();
-        //    Destroy(gameObject);
-        //}
+        if (!(collision.gameObject.tag == ("WinLA") && curSpeed < 199f) && !(collision.gameObject.tag == ("Win") && curSpeed < 199f))
+        {
+            print("Ya Dead");
+            Instantiate(LEMexplode, transform.position, transform.rotation);
+            LoseText.SetActive(true);
+            RestartButton.SetActive(true);
+            audioManager.Lose();
+            Destroy(gameObject);
+        }
     }
 
 
     public void Landed()
     {
-        Scene scene = SceneManager.GetActiveScene();
         print("sending lading position");
-        experimentController.Landed(scene.name + " Non LA");
+        experimentController.Landed(" Non LA");
     }
 
     public void LandedLA()
     {
-        Scene scene = SceneManager.GetActiveScene();
         print("sending lading position");
-        experimentController.Landed(scene.name + " LA");
+        experimentController.Landed(" LA");
     }
 
 

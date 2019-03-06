@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoggerController : MonoBehaviour {
 
@@ -12,7 +13,7 @@ public class LoggerController : MonoBehaviour {
     string participantID;
 
     // max number of trials
-    public int numberOfTrials = 10;
+    public int numberOfTrials = 5;
 
     public static LoggerController i;
 
@@ -32,7 +33,7 @@ public class LoggerController : MonoBehaviour {
     {
         // define the names of the custom datapoints we want to log
         // trial number, participant ID, trial start/end time are logged automatically
-        List<string> columnList = new List<string> { "Level 01 Choice", "Level 02 Choice", "Level 03 Choice" };
+        List<string> columnList = new List<string> { "Choice", "Status"};
 
         participantID = participantNumber.ToString();
 
@@ -57,23 +58,34 @@ public class LoggerController : MonoBehaviour {
         // at any time before we end the trial, we can assign our observations to the 'trial' dictionary
         // e.g.
         print("recieivng data" + choiceType);
-        trialLogger.trial["Level 01 Choice"] = choiceType.ToString();
+        trialLogger.trial["Choice"] = choiceType.ToString();
 
         // now we end the trial, which stores data for this trial, then increments the trial number
         trialLogger.EndTrial();
-        print("saved date" + choiceType);
+        print("saved data" + choiceType);
         // if we are at the max number of trials, we quit the game
         // note: CSV is saved on exit automatically
         if (trialLogger.currentTrialNumber >= numberOfTrials) QuitGame();
 
         // here we could have some time for feedback, loading the next trial etc
-        // but we will just start the next trial immediately
+
+        int c = SceneManager.GetActiveScene().buildIndex;
+        if (c < SceneManager.sceneCountInBuildSettings)
+            SceneManager.LoadScene(c + 1);
+
         trialLogger.StartTrial();
     }
 
     public void AgeLog(int ageValue)
     {
         trialLogger.trial["Age"] = ageValue.ToString();
+
+    }
+
+    public void StatusLog(string finishStatus)
+    {
+        trialLogger.trial["Status"] = finishStatus.ToString();
+        print(finishStatus);
     }
 
 
@@ -84,9 +96,11 @@ public class LoggerController : MonoBehaviour {
             // Application.Quit() does not work in the editor so
             // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
             UnityEditor.EditorApplication.isPlaying = false;
-        #else
-            Application.Quit();
-        #endif
+#elif (UNITY_STANDALONE) 
+    Application.Quit();
+#elif (UNITY_WEBGL)
+    Application.OpenURL("https://bentarrant.portfoliobox.net/");
+#endif
     }
 
 }

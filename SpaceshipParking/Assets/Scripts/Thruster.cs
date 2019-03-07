@@ -8,14 +8,15 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Thruster : MonoBehaviour {
 
-    public float VerticalPower=2.0f;
-    public float HorizontalPower = 1.0f;
+    public float VerticalPower;
+    public float HorizontalPower;
     public Text SpeedText;
     public GameObject WinText;
     public GameObject LoseText;
     public GameObject RestartButton;
+    public GameObject NextButton;
     private float curSpeed;
-    public AudioManager audioManager;
+    public GameManager GM;
     Rigidbody2D mRB;
     public GameObject LEMexplode;
 
@@ -32,7 +33,7 @@ public class Thruster : MonoBehaviour {
         SpeedText.text = "SPEED:";
 
         experimentController = GameObject.Find("GameManager").GetComponent<LoggerController>();
-        audioManager = GameObject.Find("GameManager").GetComponent<AudioManager>();
+        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Update()
@@ -61,9 +62,9 @@ public class Thruster : MonoBehaviour {
     {
         if (collision.gameObject.tag == ("Win") && curSpeed < 199f)
         {
-            RestartButton.SetActive(true); // CHANGE THIS TO NEXT LEVEL BUTTON
+            NextButton.SetActive(true);
             WinText.SetActive(true);
-            audioManager.Win();
+            GM.Win();
 
             Landed();
 
@@ -71,9 +72,9 @@ public class Thruster : MonoBehaviour {
 
         if (collision.gameObject.tag == ("WinLA") && curSpeed < 199f)
         {
-            RestartButton.SetActive(true);
+            NextButton.SetActive(true);
             WinText.SetActive(true);
-            audioManager.Win();
+            GM.Win();
 
             LandedLA();
 
@@ -86,7 +87,17 @@ public class Thruster : MonoBehaviour {
             Instantiate(LEMexplode, transform.position, transform.rotation);
             LoseText.SetActive(true);
             RestartButton.SetActive(true);
-            audioManager.Lose();
+            GM.Lose();
+            GM.curRepairs--; //lose a 'life'
+
+            if(GM.curRepairs <= 0)
+            {
+                print("Ya Lose");
+
+                //DEATH SEQUENCE HERE
+                //PLAYERPREFS TO DIABLE REPEAT PLAY (YOU HAVE ALREADY PARTICIPATED SCENE)
+            }
+
             Destroy(gameObject);
         }
     }
@@ -103,6 +114,8 @@ public class Thruster : MonoBehaviour {
         print("sending lading position");
         experimentController.Landed(" LA");
     }
+
+   
 
 
 }

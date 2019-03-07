@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour {
-
+public class GameManager : MonoBehaviour
+{
     public AudioClip[] audioSounds;
-
+    public int curRepairs;
+  
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Start()
+
+    {
+        curRepairs = 3;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+    }
 
     public void Win()
     {
@@ -28,4 +31,5 @@ public class AudioManager : MonoBehaviour {
         GetComponent<AudioSource>().clip = audioSounds[1];
         GetComponent<AudioSource>().Play();
     }
+
 }

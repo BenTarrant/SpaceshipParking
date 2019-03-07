@@ -69,9 +69,7 @@ public class LoggerController : MonoBehaviour {
 
         // here we could have some time for feedback, loading the next trial etc
 
-        int c = SceneManager.GetActiveScene().buildIndex;
-        if (c < SceneManager.sceneCountInBuildSettings)
-            SceneManager.LoadScene(c + 1);
+       
 
         trialLogger.StartTrial();
     }
@@ -80,6 +78,11 @@ public class LoggerController : MonoBehaviour {
     {
         trialLogger.trial["Age"] = ageValue.ToString();
 
+    }
+
+    public void RepairLog(int Repairs)
+    {
+        trialLogger.trial["Lives"] = Repairs.ToString();
     }
 
     public void StatusLog(string finishStatus)

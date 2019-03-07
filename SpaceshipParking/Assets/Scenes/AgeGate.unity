@@ -319,7 +319,7 @@ PrefabInstance:
     - target: {fileID: 3842530772982374915, guid: 6140c16bfb919f34aaf094280591c6b5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3842530772982374915, guid: 6140c16bfb919f34aaf094280591c6b5,
         type: 3}
@@ -341,7 +341,8 @@ PrefabInstance:
       propertyPath: value
       value: 
       objectReference: {fileID: 7151777}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3842530772982374914, guid: 6140c16bfb919f34aaf094280591c6b5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6140c16bfb919f34aaf094280591c6b5, type: 3}
 --- !u!1 &161559578
 GameObject:
@@ -422,6 +423,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 161559578}
   m_CullTransparentMesh: 0
+--- !u!1 &291035758 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3842530772982374912, guid: 6140c16bfb919f34aaf094280591c6b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 150312255}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &291035759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291035758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa067f9664ece44fa101dfb84163062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSounds:
+  - {fileID: 8300000, guid: 5a1d78cf81723c640ad8c082fc859597, type: 3}
+  - {fileID: 8300000, guid: cc76c079bc0266a41835121480135b2f, type: 3}
+  curRepairs: 0
 --- !u!1 &506176827
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +588,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &562628365
 GameObject:
@@ -760,7 +783,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 147.5}
+  m_AnchoredPosition: {x: 0, y: 123}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &720261713
@@ -796,7 +819,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'SPACESHIP
+  m_Text: 'SPACE
 
     PARKING'
 --- !u!222 &720261714

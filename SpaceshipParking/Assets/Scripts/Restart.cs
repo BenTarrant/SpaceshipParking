@@ -18,9 +18,16 @@ public class Restart : MonoBehaviour {
     }
 	
 
-    public void RestartGame()
+    public void NextScene()
     {
-        SceneManager.LoadScene(2); // reload scene 0
+        int c = SceneManager.GetActiveScene().buildIndex;
+        if (c < SceneManager.sceneCountInBuildSettings)
+            SceneManager.LoadScene(c + 1);
+    }
+
+    public void RestartScene()
+    {
+        Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
     }
 
 

@@ -18,6 +18,8 @@ public class TrialLogger : MonoBehaviour {
     [HideInInspector]
     public string outputFolder;
 
+    GameManager GM;
+
     bool trialStarted = false;
 
     string dataOutputPath;
@@ -35,6 +37,8 @@ public class TrialLogger : MonoBehaviour {
         {
             Directory.CreateDirectory(outputFolder);
         }
+
+        GM = GetComponent<GameManager>();
     }
 	
 
@@ -61,6 +65,7 @@ public class TrialLogger : MonoBehaviour {
         header.Insert(1, "Start Time");
         header.Insert(2, "End Time");
         header.Insert(3, "Age");
+        header.Insert(4, "Lives");
     }
 
     private void InitDict()
@@ -78,7 +83,7 @@ public class TrialLogger : MonoBehaviour {
         currentTrialNumber += 1;
         InitDict();
         trial["Start Time"] = Time.time.ToString();
-
+        trial["Lives"] = GM.curRepairs.ToString();
     }
 
     public void EndTrial()
@@ -90,6 +95,7 @@ public class TrialLogger : MonoBehaviour {
                 trial["End Time"] = Time.time.ToString();
                 Scene scene = SceneManager.GetActiveScene(); // fetch the active scene from build index
                 trial["Level"] = scene.name.ToString(); // write that scene name to string for CSV
+                trial["Lives"] = GM.curRepairs.ToString();
                 output.Add(FormatTrialData());
                 trialStarted = false;
             }

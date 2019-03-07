@@ -29,6 +29,7 @@ public class AgeGate : MonoBehaviour {
         if (inputField.text == "") // if input field is empty
         {
             Debug.Log("field is empty");
+            tooYoung.enabled = false; // ensure this text is off
             noInput.enabled = true; // activate no input text warning
             inputField.text = "Enter Age..."; // parse same information to avoid exception
         }

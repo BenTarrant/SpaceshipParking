@@ -18,6 +18,8 @@ public class TrialLogger : MonoBehaviour {
     [HideInInspector]
     public string outputFolder;
 
+    public Canvas GameOver;
+
     GameManager GM;
 
     bool trialStarted = false;
@@ -92,12 +94,26 @@ public class TrialLogger : MonoBehaviour {
         {
             if (trialStarted)
             {
+                if (GM.curRepairs == 0)
+                {
+                    StartCoroutine(Delay());
+                }
+
                 trial["End Time"] = Time.time.ToString();
                 Scene scene = SceneManager.GetActiveScene(); // fetch the active scene from build index
                 trial["Level"] = scene.name.ToString(); // write that scene name to string for CSV
                 trial["Lives"] = GM.curRepairs.ToString();
                 output.Add(FormatTrialData());
-                trialStarted = false;
+
+
+                if(GM.curRepairs > 0)
+                {
+                    trialStarted = false;
+                    StartTrial();
+
+                }
+
+                
             }
             else Debug.LogError("Error ending trial - Trial wasn't started properly");
 
@@ -127,34 +143,40 @@ public class TrialLogger : MonoBehaviour {
 
             Debug.Log(string.Format("Saved data to {0}.", dataOutputPath));
 
-            // NOW MAIL RESULTS ---------------------------------------------------
+            // NOW MAIL RESULTS --------------------------------------------------- Keep commented unless testing/deploying
 
-            MailMessage mail = new MailMessage();
+            //MailMessage mail = new MailMessage();
 
-            mail.From = new MailAddress("aversetoloss@gmail.com");
-            mail.To.Add("aversetoloss@gmail.com");
-            mail.Subject = "Test Mail Subject";
-            mail.Body = "This is for testing SMTP mail With Attachment";
+            //mail.From = new MailAddress("aversetoloss@gmail.com");
+            //mail.To.Add("aversetoloss@gmail.com");
+            //mail.Subject = "Test Mail Subject";
+            //mail.Body = "This is for testing SMTP mail With Attachment";
 
-            var pathToImage = dataOutputPath;
-            string attachmentPath = pathToImage;
-            System.Net.Mail.Attachment attachment = new System.Net.Mail.Attachment(attachmentPath);
-            mail.Attachments.Add(attachment);
+            //var pathToImage = dataOutputPath;
+            //string attachmentPath = pathToImage;
+            //System.Net.Mail.Attachment attachment = new System.Net.Mail.Attachment(attachmentPath);
+            //mail.Attachments.Add(attachment);
 
-            SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
-            smtpServer.Port = 587;
-            smtpServer.Credentials = new System.Net.NetworkCredential("aversetoloss@gmail.com", "LossAverse1") as ICredentialsByHost;
-            smtpServer.EnableSsl = true;
-            ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
-            {
-                return true;
-            };
-            smtpServer.Send(mail);
-            Debug.Log("success");
+            //SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
+            //smtpServer.Port = 587;
+            //smtpServer.Credentials = new System.Net.NetworkCredential("aversetoloss@gmail.com", "LossAverse1") as ICredentialsByHost;
+            //smtpServer.EnableSsl = true;
+            //ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+            //{
+            //    return true;
+            //};
+            //smtpServer.Send(mail);
+            //Debug.Log("success");
         }
 
         else Debug.LogError("Error saving data - TrialLogger was not initialsed properly");
         
+    }
+
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(3);
+        GameOver.enabled = true;
     }
 
 }

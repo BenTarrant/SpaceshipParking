@@ -13,7 +13,7 @@ public class LoggerController : MonoBehaviour {
     string participantID;
 
     // max number of trials
-    public int numberOfTrials = 5;
+    public int numberOfTrials = 500;
 
     public static LoggerController i;
 

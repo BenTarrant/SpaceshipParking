@@ -13,12 +13,12 @@ public class Repairs : MonoBehaviour
     {
         GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         RepairText = GetComponent<Text>();
-        RepairText.text = "REPAIRS REMAINING: " + GM.curRepairs;
+        RepairText.text = "LIVES REMAINING: " + GM.curRepairs;
     }
 
     // Update is called once per frame
     public void FixedUpdate()
     {
-        RepairText.text = "REPAIRS REMAINING: " + GM.curRepairs;
+        RepairText.text = "LIVES REMAINING: " + GM.curRepairs;
     }
 }

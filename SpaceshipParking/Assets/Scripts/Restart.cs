@@ -5,14 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class Restart : MonoBehaviour {
 
-    private string DNF;
+    private string finishStatus;
     TrialLogger experimentController;
     LoggerController experimentLogger;
 
     // Use this for initialization
     void Start ()
     {
-        DNF = "Did not Finish";
         experimentController = GameObject.Find("GameManager").GetComponent<TrialLogger>();
         experimentLogger = GameObject.Find("GameManager").GetComponent<LoggerController>();
     }
@@ -30,11 +29,21 @@ public class Restart : MonoBehaviour {
         Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
     }
 
+    public void Tutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
+    }
+
+    public void Menu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
 
     public void QuitGame()
     {
-        
-        experimentLogger.StatusLog(DNF);
+        finishStatus = ("DNF");
+        experimentLogger.StatusLog(finishStatus);
         
         experimentController.EndTrial();
 

@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Thruster : MonoBehaviour {
 
-    public float VerticalPower;
-    public float HorizontalPower;
+    public float VerticalPower = 1;
+    public float HorizontalPower = 2;
     public Text SpeedText;
     public GameObject WinText;
     public GameObject LoseText;
@@ -31,6 +31,7 @@ public class Thruster : MonoBehaviour {
         }
 
         SpeedText.text = "SPEED:";
+        SpeedText.color = Color.red;
 
         experimentController = GameObject.Find("GameManager").GetComponent<LoggerController>();
         GM = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -46,6 +47,17 @@ public class Thruster : MonoBehaviour {
         ApplyThrust(); // applies thrust based on inputs every physics frame (as we're using physics/RB movement)
         SpeedText.text = string.Format("SPEED: {0:#0.0}", mRB.velocity.magnitude); // sends the current speed of RB to string but ensures it's rounded to one decimal place
         curSpeed = mRB.velocity.magnitude;
+
+        if (curSpeed <= 3f)
+        {
+            SpeedText.color = Color.green;
+        }
+
+        if (curSpeed >= 3f)
+        {
+            SpeedText.color = Color.red;
+        }
+
     }
 
     void    ApplyThrust() {
@@ -60,7 +72,7 @@ public class Thruster : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == ("Win") && curSpeed < 199f)
+        if (collision.gameObject.tag == ("Win") && curSpeed < 3f)
         {
             NextButton.SetActive(true);
             WinText.SetActive(true);
@@ -70,7 +82,7 @@ public class Thruster : MonoBehaviour {
 
         }
 
-        if (collision.gameObject.tag == ("WinLA") && curSpeed < 199f)
+        if (collision.gameObject.tag == ("WinLA") && curSpeed < 3f)
         {
             NextButton.SetActive(true);
             WinText.SetActive(true);
@@ -81,24 +93,26 @@ public class Thruster : MonoBehaviour {
         }
 
 
-        if (!(collision.gameObject.tag == ("WinLA") && curSpeed < 199f) && !(collision.gameObject.tag == ("Win") && curSpeed < 199f))
+        if (!(collision.gameObject.tag == ("WinLA") && curSpeed < 3f) && !(collision.gameObject.tag == ("Win") && curSpeed < 3f))
         {
             print("Ya Dead");
             Instantiate(LEMexplode, transform.position, transform.rotation);
-            LoseText.SetActive(true);
-            RestartButton.SetActive(true);
-            GM.Lose();
-            GM.curRepairs--; //lose a 'life'
 
-            if(GM.curRepairs <= 0)
+            if(GM.curRepairs == 0)
             {
-                print("Ya Lose");
-
-                //DEATH SEQUENCE HERE
-                //PLAYERPREFS TO DIABLE REPEAT PLAY (YOU HAVE ALREADY PARTICIPATED SCENE)
+                GM.Lose();
+                Destroy(gameObject);
             }
 
-            Destroy(gameObject);
+            else
+            {
+                GM.Lose();
+                LoseText.SetActive(true);
+                RestartButton.SetActive(true);
+                GM.curRepairs--; //lose a 'life'
+                Destroy(gameObject);
+            }
+
         }
     }
 
@@ -107,6 +121,7 @@ public class Thruster : MonoBehaviour {
     {
         print("sending lading position");
         experimentController.Landed(" Non LA");
+        this.enabled =false;
     }
 
     public void LandedLA()

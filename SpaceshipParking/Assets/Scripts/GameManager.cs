@@ -1,22 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public AudioClip land;
     public AudioClip crash;
+    public AudioClip thrust;
     public AudioSource source;
     public int curRepairs;
 
     private TrialLogger logger;
     public Canvas handbook;
-  
+
+    public bool muted = false;
+    public Image soundDisplay;
+    public Sprite soundOn;
+    public Sprite soundOff;
+
+    public static bool IsInputEnabled = true;
+
 
     // Use this for initialization
     void Start()
 
     {
+
         curRepairs = 3;
         source = GetComponent<AudioSource>();
         handbook.GetComponent<Canvas>();
@@ -68,6 +78,25 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1;
             handbook.enabled = false;
+        }
+    }
+
+    public void MuteAudio()
+    {
+
+        if (muted == true)
+        {
+            muted = false;
+            soundDisplay.sprite = soundOn;
+            source.mute = false;
+
+        }
+
+        else if (muted == false)
+        {
+            muted = true;
+            soundDisplay.sprite = soundOff;
+            source.mute = true;
         }
     }
 

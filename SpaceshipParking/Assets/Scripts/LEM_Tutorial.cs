@@ -16,6 +16,9 @@ public class LEM_Tutorial : MonoBehaviour
     public float HorizontalPower = 2;
 
     private SpriteRenderer rend;
+    public GameManager GM;
+
+    public ParticleSystem[] Thrusters;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +28,9 @@ public class LEM_Tutorial : MonoBehaviour
         {
         }
 
+        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        GameManager.IsInputEnabled = true;
         SpeedText.text = "SPEED:";
         SpeedText.color = Color.red;
 
@@ -32,9 +38,45 @@ public class LEM_Tutorial : MonoBehaviour
 
     }
 
+    void Update()
+    {
+        if (GameManager.IsInputEnabled)
+        {
+
+            if (Input.GetKey("w") || Input.GetKey("up"))
+            {
+                Thrusters[0].Emit(10);
+            }
+
+            if (Input.GetKey("a") || Input.GetKey("left"))
+            {
+                Thrusters[1].Emit(10);
+            }
+
+            if (Input.GetKey("d") || Input.GetKey("right"))
+            {
+                Thrusters[2].Emit(10);
+            }
+
+            if (Input.GetKey("s") || Input.GetKey("down"))
+            {
+                Thrusters[3].Emit(10);
+            }
+
+            else foreach (ParticleSystem thrust in Thrusters)
+                {
+                    thrust.Emit(0);
+                }
+        }
+    }
+
     void FixedUpdate()
     {
-        ApplyThrust(); // applies thrust based on inputs every physics frame (as we're using physics/RB movement)
+        if (GameManager.IsInputEnabled)
+        {
+            ApplyThrust(); // applies thrust based on inputs every physics frame (as we're using physics/RB movement)
+        }
+
         SpeedText.text = string.Format("SPEED: {0:#0.0}", mRB.velocity.magnitude); // sends the current speed of RB to string but ensures it's rounded to one decimal place
         curSpeed = mRB.velocity.magnitude;
 
@@ -67,6 +109,7 @@ public class LEM_Tutorial : MonoBehaviour
 
             Instantiate(LEMexplode, transform.position, transform.rotation);
             rend.enabled = false;
+            GameManager.IsInputEnabled = false;
             StartCoroutine(Reload());
             
         }
@@ -76,5 +119,10 @@ public class LEM_Tutorial : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+    }
+
+    public void ButtonPause()
+    {
+        GM.PauseGame();
     }
 }

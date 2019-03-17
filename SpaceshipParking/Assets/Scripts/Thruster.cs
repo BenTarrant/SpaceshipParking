@@ -24,11 +24,15 @@ public class Thruster : MonoBehaviour {
 
     LoggerController experimentController;
 
+    public ParticleSystem[] Thrusters;
+
     // Use this for initialization
     void Start () {
         mRB = GetComponent<Rigidbody2D>();      //Get Parent RB
         if(mRB==null) {
         }
+
+        GameManager.IsInputEnabled = true;
 
         SpeedText.text = "SPEED:";
         SpeedText.color = Color.red;
@@ -39,12 +43,40 @@ public class Thruster : MonoBehaviour {
 
     void Update()
     {
+        if (Input.GetKey("w") || Input.GetKey("up"))
+        {
+            Thrusters[0].Emit(10);
+        }
 
+        if (Input.GetKey("a") || Input.GetKey("left"))
+        {
+            Thrusters[1].Emit(10);
+        }
+
+        if (Input.GetKey("d") || Input.GetKey("right"))
+        {
+            Thrusters[2].Emit(10);
+        }
+
+        if (Input.GetKey("s") || Input.GetKey("down"))
+        {
+            Thrusters[3].Emit(10);
+        }
+
+        else foreach (ParticleSystem thrust in Thrusters)
+            {
+                thrust.Emit(0);
+            }
     }
 
     // Update is called once per frame
     void FixedUpdate() {
-        ApplyThrust(); // applies thrust based on inputs every physics frame (as we're using physics/RB movement)
+
+        if(GameManager.IsInputEnabled)
+        {
+            ApplyThrust(); // applies thrust based on inputs every physics frame (as we're using physics/RB movement)
+        }
+
         SpeedText.text = string.Format("SPEED: {0:#0.0}", mRB.velocity.magnitude); // sends the current speed of RB to string but ensures it's rounded to one decimal place
         curSpeed = mRB.velocity.magnitude;
 
@@ -57,6 +89,9 @@ public class Thruster : MonoBehaviour {
         {
             SpeedText.color = Color.red;
         }
+
+       
+
 
     }
 
@@ -121,16 +156,20 @@ public class Thruster : MonoBehaviour {
     {
         print("sending lading position");
         experimentController.Landed(" Non LA");
-        this.enabled =false;
+        GameManager.IsInputEnabled = false;
     }
 
     public void LandedLA()
     {
         print("sending lading position");
         experimentController.Landed(" LA");
+        GameManager.IsInputEnabled = false;
     }
 
-   
+   public void ButtonPause()
+    {
+        GM.PauseGame();
+    }
 
 
 }

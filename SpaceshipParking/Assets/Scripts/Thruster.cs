@@ -128,7 +128,7 @@ public class Thruster : MonoBehaviour {
         }
 
 
-        if (!(collision.gameObject.tag == ("WinLA") && curSpeed < 3f) && !(collision.gameObject.tag == ("Win") && curSpeed < 3f))
+        if (!(collision.gameObject.tag == ("WinLA") && curSpeed < 3f) && !(collision.gameObject.tag == ("Win") && curSpeed < 3f)&& !(collision.gameObject.tag == ("Start")))
         {
             print("Ya Dead");
             Instantiate(LEMexplode, transform.position, transform.rotation);

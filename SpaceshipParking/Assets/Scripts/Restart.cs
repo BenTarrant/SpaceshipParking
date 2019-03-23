@@ -39,27 +39,40 @@ public class Restart : MonoBehaviour {
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void FinalLevel()
+    {
+        experimentController.Ender();
+        experimentController.EndTrial();
+    }
 
     public void QuitGame()
     {
         finishStatus = ("DNF");
         experimentLogger.StatusLog(finishStatus);
-        
+        experimentController.Ender();
         experimentController.EndTrial();
+    }
 
+    public void HardQuit()
+    {
+#if UNITY_EDITOR
 
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif (UNITY_STANDALONE)
+    Application.Quit();
+#endif
+    }
+
+    public void QuestionnaireButton() {
 #if UNITY_EDITOR
         // Application.Quit() does not work in the editor so
         // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
-        Application.OpenURL("https://bentarrant.portfoliobox.net/");
         UnityEditor.EditorApplication.isPlaying = false;
-
-#elif (UNITY_STANDALONE) 
-    Application.OpenURL("https://bentarrant.portfoliobox.net/");
+        Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSeFBQ5sxFlXXWB4Xyk8hd2POZt_HWRphyLgsTWjFIG6l1F3rQ/viewform?usp=sf_link");
+#elif (UNITY_STANDALONE)
     Application.Quit();
+                Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSeFBQ5sxFlXXWB4Xyk8hd2POZt_HWRphyLgsTWjFIG6l1F3rQ/viewform?usp=sf_link");
 #elif (UNITY_WEBGL)
-
-    Application.OpenURL("https://bentarrant.portfoliobox.net/");
 #endif
     }
 

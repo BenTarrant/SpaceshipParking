@@ -12,6 +12,7 @@ public class Thruster : MonoBehaviour {
     public float HorizontalPower = 2;
     public Text SpeedText;
     public GameObject WinText;
+    public GameObject WinLAText;
     public GameObject LoseText;
     public GameObject RestartButton;
     public GameObject NextButton;
@@ -43,9 +44,12 @@ public class Thruster : MonoBehaviour {
 
     void Update()
     {
+
+
         if (Input.GetKey("w") || Input.GetKey("up"))
         {
             Thrusters[0].Emit(10);
+            
         }
 
         if (Input.GetKey("a") || Input.GetKey("left"))
@@ -64,9 +68,9 @@ public class Thruster : MonoBehaviour {
         }
 
         else foreach (ParticleSystem thrust in Thrusters)
-            {
+        {
                 thrust.Emit(0);
-            }
+        }
     }
 
     // Update is called once per frame
@@ -110,9 +114,9 @@ public class Thruster : MonoBehaviour {
         if (collision.gameObject.tag == ("Win") && curSpeed < 3f)
         {
             NextButton.SetActive(true);
-            WinText.SetActive(true);
+            WinLAText.SetActive(true);
             GM.Win();
-
+            GM.curRepairs++; //gain a life
             Landed();
 
         }
@@ -136,6 +140,7 @@ public class Thruster : MonoBehaviour {
             if(GM.curRepairs == 0)
             {
                 GM.Lose();
+                GM.GameEnd();
                 Destroy(gameObject);
             }
 

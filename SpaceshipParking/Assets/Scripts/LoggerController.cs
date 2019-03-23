@@ -102,7 +102,6 @@ public class LoggerController : MonoBehaviour {
 #elif (UNITY_STANDALONE) 
     Application.Quit();
 #elif (UNITY_WEBGL)
-    Application.OpenURL("https://bentarrant.portfoliobox.net/");
 #endif
     }
 

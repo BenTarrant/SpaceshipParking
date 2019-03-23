@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public AudioClip land;
     public AudioClip crash;
     public AudioClip thrust;
+    public AudioClip GO;
     public AudioSource source;
     public int curRepairs;
 
@@ -64,6 +65,11 @@ public class GameManager : MonoBehaviour
     {
         source.PlayOneShot(crash);
         logger.EndTrial();
+    }
+
+    public void GameEnd()
+    {
+        source.PlayOneShot(GO);
     }
 
     public void PauseGame()

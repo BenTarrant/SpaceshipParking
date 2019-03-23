@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/AgeGate.unity
     guid: 59e2e3528f31edc47a4db3708c0630f8
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 954a832510b40b84396e64b60c00936a
-  - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: 73d9902f10569ad45b8709f91f42c40e
   - enabled: 1
@@ -23,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/03.unity
     guid: 537c71071b0267b43aca258fe0f1918c
+  - enabled: 1
+    path: Assets/Scenes/04.unity
+    guid: 367f519cdbc47394a8eb5b2631f28542
+  - enabled: 1
+    path: Assets/Scenes/PlayGate.unity
+    guid: 8f57be6e284117144bf3885e7365e5a9
   m_configObjects: {}

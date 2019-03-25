@@ -20,6 +20,9 @@ public class LEM_Tutorial : MonoBehaviour
 
     public ParticleSystem[] Thrusters;
 
+    public Button BeginButton;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -112,6 +115,12 @@ public class LEM_Tutorial : MonoBehaviour
             GameManager.IsInputEnabled = false;
             StartCoroutine(Reload());
             
+        }
+
+        if(collision.gameObject.tag == ("Win") && curSpeed < 3.1f)
+        {
+            BeginButton.gameObject.SetActive(true);
+            print("landed");
         }
     }
 

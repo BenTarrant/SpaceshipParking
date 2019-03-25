@@ -190,7 +190,7 @@ public class TrialLogger : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         //playfailuresound
-        GameOver.enabled = true;
+        Ender();
 
     }
 

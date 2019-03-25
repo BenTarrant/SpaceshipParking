@@ -40,6 +40,7 @@ public class TrialLogger : MonoBehaviour
 
 
 
+
     // Use this for initialization
     void Awake()
     {
@@ -210,8 +211,13 @@ public class TrialLogger : MonoBehaviour
         }
 
         GameID.text = "Unique ID: " + myID;
+        TextEditor te = new TextEditor();
+        te.text = myID;
+        te.SelectAll();
+        te.Copy();
 
     }
+
 
 
 }

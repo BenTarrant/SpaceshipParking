@@ -9,6 +9,8 @@ public class Restart : MonoBehaviour {
     TrialLogger experimentController;
     LoggerController experimentLogger;
 
+    public GameObject sending;
+
     // Use this for initialization
     void Start ()
     {
@@ -55,6 +57,8 @@ public class Restart : MonoBehaviour {
 
     public void HardQuit()
     {
+        sending.gameObject.SetActive(true);
+
 #if UNITY_EDITOR
 
         UnityEditor.EditorApplication.isPlaying = false;

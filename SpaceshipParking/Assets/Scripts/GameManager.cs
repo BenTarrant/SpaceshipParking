@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     {
 
-        curRepairs = 3;
+        curRepairs = 4;
         source = GetComponent<AudioSource>();
         handbook.GetComponent<Canvas>();
         logger = GetComponent<TrialLogger>();

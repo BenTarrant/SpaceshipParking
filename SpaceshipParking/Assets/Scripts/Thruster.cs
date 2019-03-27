@@ -111,20 +111,26 @@ public class Thruster : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        print("collision");
         if (collision.gameObject.tag == ("Win") && curSpeed < 3f)
         {
-            NextButton.SetActive(true);
-            WinLAText.SetActive(true);
-            GM.Win();
+           
 
-            if (GM.curRepairs <= 0 )
+            if (GM.curRepairs == 0 )
             {
+                print("no life death");
+                Instantiate(LEMexplode, transform.position, transform.rotation);
+                GM.curRepairs--;
                 GM.Lose();
                 GM.GameEnd();
                 Destroy(gameObject);
             }
+
             else
             {
+                NextButton.SetActive(true);
+                WinLAText.SetActive(true);
+                GM.Win();
                 GM.curRepairs--; //lose a life
                 Landed();
             }

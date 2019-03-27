@@ -107,7 +107,7 @@ public class TrialLogger : MonoBehaviour
         {
             if (trialStarted)
             {
-                if (GM.curRepairs == 0)
+                if (GM.curRepairs < 0)
                 {
                     StartCoroutine(Delay());
                 }
@@ -120,7 +120,7 @@ public class TrialLogger : MonoBehaviour
                 output.Add(FormatTrialData());
 
 
-                if (GM.curRepairs > 0)
+                if (GM.curRepairs >= 0)
                 {
                     trialStarted = false;
                     StartTrial();
@@ -203,10 +203,14 @@ public class TrialLogger : MonoBehaviour
 
     void AssignID()
     {
-        if (hasID = false)
+
+        if (hasID)
         {
 
+        }
 
+        else
+        {
             int charAmount = 4;
             for (int i = 0; i < charAmount; i++)
             {
@@ -221,6 +225,8 @@ public class TrialLogger : MonoBehaviour
             te.Copy();
             hasID = true;
         }
+
+
     }
 
 

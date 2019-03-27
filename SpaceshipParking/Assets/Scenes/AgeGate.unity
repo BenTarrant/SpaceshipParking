@@ -3490,9 +3490,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'BUT GIVE NO
+  m_Text: 'BUT MINUS ONE
 
-    REWARD'
+    LIFE'
 --- !u!222 &1337948727
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3571,9 +3571,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'BUT REWARD ONE
-
-    LIFE '
+  m_Text: "BUT DO NOT \nMINUS A LIFE"
 --- !u!222 &1341544920
 CanvasRenderer:
   m_ObjectHideFlags: 0

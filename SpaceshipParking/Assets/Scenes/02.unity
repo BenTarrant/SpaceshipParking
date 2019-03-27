@@ -138,7 +138,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 18592209}
-  m_Text: +0 LIVES
+  m_Text: '- 1 LIFE'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -197,7 +197,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 18592209}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.79, y: 6.35, z: 0}
+  m_LocalPosition: {x: 18.05, y: 6.48, z: 0}
   m_LocalScale: {x: 0.84000003, y: 0.616, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -458,7 +458,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: SAFE LANDING + A LIFE!
+  m_Text: SAFE LANDING BUT LOSE A LIFE!
 --- !u!222 &524987754
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -947,6 +947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dd996cda475f5e42a47d70e03bc08bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sending: {fileID: 0}
 --- !u!114 &976068977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1051,7 +1052,7 @@ GameObject:
   - component: {fileID: 1064884131}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: WinLA
+  m_TagString: Win
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1193,6 +1194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dd996cda475f5e42a47d70e03bc08bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sending: {fileID: 0}
 --- !u!114 &1065252978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1533,7 +1535,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1497808568}
-  m_Text: +1 LIFE
+  m_Text: +0 LIVES
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -1745,36 +1747,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LEM
       objectReference: {fileID: 0}
-    - target: {fileID: 3007926540732210793, guid: 1ad2f7e54111ef34293eec896f058c88,
-        type: 3}
-      propertyPath: SpeedText
-      value: 
-      objectReference: {fileID: 1366200621}
-    - target: {fileID: 3007926540732210793, guid: 1ad2f7e54111ef34293eec896f058c88,
-        type: 3}
-      propertyPath: WinText
-      value: 
-      objectReference: {fileID: 549467912}
-    - target: {fileID: 3007926540732210793, guid: 1ad2f7e54111ef34293eec896f058c88,
-        type: 3}
-      propertyPath: LoseText
-      value: 
-      objectReference: {fileID: 1127597334}
-    - target: {fileID: 3007926540732210793, guid: 1ad2f7e54111ef34293eec896f058c88,
-        type: 3}
-      propertyPath: RestartButton
-      value: 
-      objectReference: {fileID: 1065252975}
-    - target: {fileID: 3007926540732210793, guid: 1ad2f7e54111ef34293eec896f058c88,
-        type: 3}
-      propertyPath: NextButton
-      value: 
-      objectReference: {fileID: 976068974}
-    - target: {fileID: 3007926540732210793, guid: 1ad2f7e54111ef34293eec896f058c88,
-        type: 3}
-      propertyPath: WinLAText
-      value: 
-      objectReference: {fileID: 524987751}
     - target: {fileID: 3007926540732210772, guid: 1ad2f7e54111ef34293eec896f058c88,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1830,6 +1802,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3007926540732210793, guid: 1ad2f7e54111ef34293eec896f058c88,
+        type: 3}
+      propertyPath: SpeedText
+      value: 
+      objectReference: {fileID: 1366200621}
+    - target: {fileID: 3007926540732210793, guid: 1ad2f7e54111ef34293eec896f058c88,
+        type: 3}
+      propertyPath: WinText
+      value: 
+      objectReference: {fileID: 549467912}
+    - target: {fileID: 3007926540732210793, guid: 1ad2f7e54111ef34293eec896f058c88,
+        type: 3}
+      propertyPath: LoseText
+      value: 
+      objectReference: {fileID: 1127597334}
+    - target: {fileID: 3007926540732210793, guid: 1ad2f7e54111ef34293eec896f058c88,
+        type: 3}
+      propertyPath: RestartButton
+      value: 
+      objectReference: {fileID: 1065252975}
+    - target: {fileID: 3007926540732210793, guid: 1ad2f7e54111ef34293eec896f058c88,
+        type: 3}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 976068974}
+    - target: {fileID: 3007926540732210793, guid: 1ad2f7e54111ef34293eec896f058c88,
+        type: 3}
+      propertyPath: WinLAText
+      value: 
+      objectReference: {fileID: 524987751}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ad2f7e54111ef34293eec896f058c88, type: 3}
 --- !u!1 &1759771287 stripped
@@ -1958,7 +1960,7 @@ GameObject:
   - component: {fileID: 1952248308}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Win
+  m_TagString: WinLA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

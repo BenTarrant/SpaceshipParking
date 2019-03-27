@@ -116,8 +116,19 @@ public class Thruster : MonoBehaviour {
             NextButton.SetActive(true);
             WinLAText.SetActive(true);
             GM.Win();
-            GM.curRepairs++; //gain a life
-            Landed();
+
+            if (GM.curRepairs <= 0 )
+            {
+                GM.Lose();
+                GM.GameEnd();
+                Destroy(gameObject);
+            }
+            else
+            {
+                GM.curRepairs--; //lose a life
+                Landed();
+            }
+
 
         }
 

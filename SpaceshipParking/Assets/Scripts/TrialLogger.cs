@@ -38,7 +38,7 @@ public class TrialLogger : MonoBehaviour
     public string myID;
     public Text GameID;
 
-
+    public bool hasID = false;
 
 
     // Use this for initialization
@@ -203,19 +203,24 @@ public class TrialLogger : MonoBehaviour
 
     void AssignID()
     {
-        int charAmount = 4;
-        for (int i = 0; i < charAmount; i++)
+        if (hasID = false)
         {
-            myID += glyphs[UnityEngine.Random.Range(0, glyphs.Length)];
 
+
+            int charAmount = 4;
+            for (int i = 0; i < charAmount; i++)
+            {
+                myID += glyphs[UnityEngine.Random.Range(0, glyphs.Length)];
+
+            }
+
+            GameID.text = "Unique ID: " + myID;
+            TextEditor te = new TextEditor();
+            te.text = myID;
+            te.SelectAll();
+            te.Copy();
+            hasID = true;
         }
-
-        GameID.text = "Unique ID: " + myID;
-        TextEditor te = new TextEditor();
-        te.text = myID;
-        te.SelectAll();
-        te.Copy();
-
     }
 
 

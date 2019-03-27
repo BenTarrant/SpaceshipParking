@@ -182,7 +182,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: BUT GIVE NO REWARDS
+  m_Text: BUT MINUS ONE LIFE
 --- !u!222 &17821392
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -261,7 +261,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: BUT REWARD ONE LIFE
+  m_Text: BUT DO NOT MINUS A LIFE
 --- !u!222 &48032008
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -304,7 +304,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 249.1, y: -0}
+  m_AnchoredPosition: {x: 249.1, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &128085898
@@ -661,7 +661,7 @@ PrefabInstance:
     - target: {fileID: 1342769316158902760, guid: ca09ff3323a3db7459c9f267c1cfd4ae,
         type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1342769316158902760, guid: ca09ff3323a3db7459c9f267c1cfd4ae,
         type: 3}
@@ -969,6 +969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dd996cda475f5e42a47d70e03bc08bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sending: {fileID: 0}
 --- !u!198 &625183064 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3007926542456344019, guid: 1ad2f7e54111ef34293eec896f058c88,
@@ -1001,7 +1002,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 651223090}
-  m_Text: +0 LIVES
+  m_Text: -1 LIFE
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -1060,7 +1061,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 651223090}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -36.64, y: 31.51, z: 0}
+  m_LocalPosition: {x: -35.69, y: 31.51, z: 0}
   m_LocalScale: {x: 0.84000003, y: 0.616, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1258,7 +1259,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 205, y: -0}
+  m_AnchoredPosition: {x: 205, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &876554936
@@ -1566,7 +1567,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 164.5, y: -0}
+  m_AnchoredPosition: {x: 164.5, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1128096037
@@ -2013,7 +2014,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 360.9, y: -0}
+  m_AnchoredPosition: {x: 360.9, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1424266221
@@ -2611,7 +2612,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1794837197}
-  m_Text: +1 LIFE
+  m_Text: + 0 LIVES
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -2670,7 +2671,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1794837197}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.46, y: 31.57, z: 0}
+  m_LocalPosition: {x: 26.01, y: 31.57, z: 0}
   m_LocalScale: {x: 0.84000003, y: 0.616, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

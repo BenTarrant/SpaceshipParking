@@ -118,7 +118,7 @@ public class Thruster : MonoBehaviour {
 
             if (GM.curRepairs == 0 )
             {
-                print("no life death");
+                Landed();
                 Instantiate(LEMexplode, transform.position, transform.rotation);
                 GM.curRepairs--;
                 GM.Lose();
@@ -156,6 +156,7 @@ public class Thruster : MonoBehaviour {
 
             if(GM.curRepairs == 0)
             {
+                GM.curRepairs--;
                 GM.Lose();
                 GM.GameEnd();
                 Destroy(gameObject);

@@ -1,0 +1,6 @@
+ID,Age,Level,Start Time,End Time,Lives,Choice,Status
+cx0f,45,01,0,27.06,3, Non LA,
+cx0f,,02,27.06,49.66,3, LA,
+cx0f,,03,49.66,62.34,2, Non LA,
+cx0f,,04,62.34,87.8,2, LA,
+cx0f,,04,87.8,88.64287,2,,

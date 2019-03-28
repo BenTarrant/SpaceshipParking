@@ -66,6 +66,7 @@ public class TrialLogger : MonoBehaviour
         header = customHeader;
         InitHeader();
         InitDict();
+        AssignID();
         output = new List<string>();
         output.Add(string.Join(",", header.ToArray()));
 
@@ -198,7 +199,7 @@ public class TrialLogger : MonoBehaviour
     public void Ender()
     {
         GameOver.enabled = true;
-        AssignID();
+        
     }
 
     void AssignID()
@@ -219,6 +220,7 @@ public class TrialLogger : MonoBehaviour
             }
 
             GameID.text = "Unique ID: " + myID;
+            
             TextEditor te = new TextEditor();
             te.text = myID;
             te.SelectAll();
